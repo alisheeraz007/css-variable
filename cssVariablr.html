@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        :root{
+            --spacing : 10px;
+            --blur : 0px;
+            --color : black;
+            --width : 810px;
+        }
+        .mainDiv span{
+            border: 3px solid var(--color);
+            padding: 10px;
+            margin: 10px;
+        }
+        .mainDiv{
+            margin-bottom: 5%;
+        }
+        img{
+            width: var(--width);
+            padding: var(--spacing);
+            filter: blur(var(--blur));
+            background: var(--color);
+        }
+        body{
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="mainDiv">
+        <span>
+            <label for="spacing">Spacing</label>
+            <input class="slider" type="range" name="spacing" value="10" min="0" max="200" data-sizing="px">
+        </span>
+
+        <span>
+            <label for="blur">Blur</label>
+            <input class="slider" type="range" name="blur" value="0" min="0" max="50" data-sizing="px">
+        </span>
+            
+        <span>
+            <label for="color">Box Color</label>
+            <input type="color" name="color" value="#000000">
+        </span>
+
+        <span>
+            <label for="width">Width</label>
+            <input class="slider" type="range" name="width" value="0" min="810" max="1200" data-sizing="px">
+        </span>
+    </div>
+    <img src="backgroundimg.jpg">
+</body>
+    <script>
+        var inputs = document.querySelectorAll("input");
+        // console.log(inputs);
+
+        function update(){
+            console.log(this.name)
+            var suffix = this.dataset.sizing || "";
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+        }
+
+        inputs.forEach(inputs => inputs.addEventListener("change", update));
+        inputs.forEach(inputs => inputs.addEventListener("mousemove", update));
+        // inputs.forEach(function (x) { return x.addEventListener("mousemove", update)})
+    </script>
+</html>
